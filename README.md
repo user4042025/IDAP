@@ -18,18 +18,18 @@ A detailed examination of the algorithmic steps for calculating the divergence i
 
 ---
 
-**Require:** Input sample $x$, network parameters $\{{W_l, b_l\}}_{l=1}^{L}$  
-**Ensure:** Total divergence $D_{FC}$
+**Require:** Input sample $`x`$, network parameters $`\{{W_l, b_l\}}_{l=1}^{L}`$  
+**Ensure:** Total divergence $`D_{FC}`$
 
-Initialize $D_{FC} \leftarrow 0$  
-$h_0 \leftarrow x$        {Set input}  
-for $l \leftarrow 1$ to $L$ do  
-&nbsp;&nbsp;&nbsp;&nbsp;$z_l \leftarrow W_l h_{l−1} + b_l$  {Pre-activation}  
-&nbsp;&nbsp;&nbsp;&nbsp;$h_l \leftarrow \sigma(z_l)$      {Activation}  
-&nbsp;&nbsp;&nbsp;&nbsp;$\delta_l \leftarrow \|h_l\|_2 \cdot \|W_l\|_F$ {Layer divergence}  
-&nbsp;&nbsp;&nbsp;&nbsp;$D_{FC} \leftarrow D_{FC} + \delta_l$  
+Initialize $`D_{FC} \leftarrow 0`$  
+$`h_0 \leftarrow x`$        {Set input}  
+for $`l \leftarrow 1`$ to $`L`$ do  
+&nbsp;&nbsp;&nbsp;&nbsp;$`z_l \leftarrow W_l h_{l−1} + b_l`$  {Pre-activation}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`h_l \leftarrow \sigma(z_l)`$      {Activation}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`\delta_l \leftarrow \|h_l\|_2 \cdot \|W_l\|_F`$ {Layer divergence}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`D_{FC} \leftarrow D_{FC} + \delta_l`$  
 end for  
-return $D_{FC}=0$
+return $`D_{FC}=0`$
 
 ---
 
@@ -37,15 +37,15 @@ Furthermore, we provide complexity estimates for the proposed procedure for calc
 
 The algorithm requires:
 
-- $O(∑_{l=1}^{L} n_l n_{l−1})$ time (matrix-vector multiplications),
-- $O(∑_{l=1}^{L} n_l)$ space (storing activations).
+- $`O(∑_{l=1}^{L} n_l n_{l−1})`$ time (matrix-vector multiplications),
+- $`O(∑_{l=1}^{L} n_l)`$ space (storing activations).
 
 It is also worth noting some notable properties of the definition and procedure for calculating the divergence flow for fully connected networks:
 
 1. For ReLU networks, the divergence simplifies to:  
-$ \phi = \| h_l \leftarrow \max(0, z_l) \|_2 \cdot \| W_l \|_F. $
+$` \phi = \| h_l \leftarrow \max(0, z_l) \|_2 \cdot \| W_l \|_F. `$
 
-2. The weight matrix norm $\|W_l\|_F$ acts as an importance weighting factor.
+2. The weight matrix norm $`\|W_l\|_F`$ acts as an importance weighting factor.
 
 ---
 
@@ -57,29 +57,29 @@ We also provide a detailed examination of the algorithm for calculating the dive
 
 ---
 
-**Require:** Input tensor $X$, conv parameters $\{{W_l, b_l}\}_{l=1}^{L}$  
-**Ensure:** Total divergence $D_{conv}$
+**Require:** Input tensor $`X`$, conv parameters $`\{{W_l, b_l}\}_{l=1}^{L}`$  
+**Ensure:** Total divergence $`D_{conv}`$
 
-Initialize $D_{conv} \leftarrow 0$  
-$A_0 \leftarrow X$        {Set input}  
-for $l \leftarrow 1$ to $L$ do  
-&nbsp;&nbsp;&nbsp;&nbsp;$Z_l \leftarrow W_l A_{l−1} + b_l$  {Convolutional operation}  
-&nbsp;&nbsp;&nbsp;&nbsp;$A_l \leftarrow \sigma(Z_l)$      {Activation}  
-&nbsp;&nbsp;&nbsp;&nbsp;Compute spatial dimensions $H_l$, $W_l$, $C_l$ of $A_l$  
-&nbsp;&nbsp;&nbsp;&nbsp;$\delta_l \leftarrow \frac{1}{{H_l}{W_l}{C_l}} \|A_l\|_F \cdot \|W_l\|_F$  
-&nbsp;&nbsp;&nbsp;&nbsp;$D_{conv} \leftarrow D_{conv} + \delta_l$  
+Initialize $`D_{conv} \leftarrow 0`$  
+$`A_0 \leftarrow X`$        {Set input}  
+for $`l \leftarrow 1`$ to $`L`$ do  
+&nbsp;&nbsp;&nbsp;&nbsp;$`Z_l \leftarrow W_l A_{l−1} + b_l`$  {Convolutional operation}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`A_l \leftarrow \sigma(Z_l)`$      {Activation}  
+&nbsp;&nbsp;&nbsp;&nbsp;Compute spatial dimensions $`H_l`$, $`W_l`$, $`C_l`$ of $`A_l`$  
+&nbsp;&nbsp;&nbsp;&nbsp;$`\delta_l \leftarrow \frac{1}{{H_l}{W_l}{C_l}} \|A_l\|_F \cdot \|W_l\|_F`$  
+&nbsp;&nbsp;&nbsp;&nbsp;$`D_{conv} \leftarrow D_{conv} + \delta_l`$  
 end for  
-return $D_{conv}=0$
+return $`D_{conv}=0`$
 
 ---
 
 Now let us give the complexity estimation:  
-• $O(∑_{l=1}^{L} H_l W_l C_l C_{l−1} k^2)$ time (convolution operations),  
-• $O(∑_{l=1}^{L} H_l W_l C_l)$ space (activation storage).  
+• $`O(∑_{l=1}^{L} H_l W_l C_l C_{l−1} k^2)`$ time (convolution operations),  
+• $`O(∑_{l=1}^{L} H_l W_l C_l)`$ space (activation storage).  
 Finally, we have to denote a group of remarkable aspects.  
 • For strided convolutions, adjust spatial dimensions accordingly.  
-• Batch normalization can be incorporated by modifying the $Z_l$ computation.  
-• For pooling layers, include them in the computational path but set $ϕ = 0$ (no parameters).  
+• Batch normalization can be incorporated by modifying the $`Z_l`$ computation.  
+• For pooling layers, include them in the computational path but set $`ϕ = 0`$ (no parameters).  
 
 ---
 
@@ -91,33 +91,33 @@ We formalize the algorithm for calculating divergence in the case of self-attent
 
 ---
 
-**Require:** Input sequence $X \in \R^{n \times d_{model}}$, attention parameters $\{{W_Q^h, W_K^h, W_V^h}\}_{h=1}^{H}$  
-**Ensure:** Total divergence $D_{attn}$
+**Require:** Input sequence $`X \in R^{n \times d_{model}}`$, attention parameters $`\{{W_Q^h, W_K^h, W_V^h}\}_{h=1}^{H}`$  
+**Ensure:** Total divergence $`D_{attn}`$
 
-Initialize $D_{attn} \leftarrow 0$  
-for $h \leftarrow 1$ to $H$ do  
-&nbsp;&nbsp;&nbsp;&nbsp;$Q^h \leftarrow XW_Q^h$              {Query projection}  
-&nbsp;&nbsp;&nbsp;&nbsp;$K^h \leftarrow XW_K^h$              {Key projection}  
-&nbsp;&nbsp;&nbsp;&nbsp;$V^h \leftarrow XW_V^h$              {Value projection}  
-&nbsp;&nbsp;&nbsp;&nbsp;$S^h \leftarrow softmax(\frac{Q^h(K^h)^T}{\sqrt{d_k}})$        {Attention scores}  
-&nbsp;&nbsp;&nbsp;&nbsp;$O^h \leftarrow S^hV^h$              {Attention output}  
-&nbsp;&nbsp;&nbsp;&nbsp;$\delta_h \leftarrow \frac{1}{n} \|A^h\|_F \cdot (\|W_Q^h\|_F+\|W_K^h\|_F+\|W_V^h\|_F)$  
-&nbsp;&nbsp;&nbsp;&nbsp;$D_{attn} \leftarrow D_{attn} + \delta_h$  
+Initialize $`D_{attn} \leftarrow 0`$  
+for $`h \leftarrow 1`$ to $`H`$ do  
+&nbsp;&nbsp;&nbsp;&nbsp;$`Q^h \leftarrow XW_Q^h`$              {Query projection}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`K^h \leftarrow XW_K^h`$              {Key projection}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`V^h \leftarrow XW_V^h`$              {Value projection}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`S^h \leftarrow softmax(\frac{Q^h(K^h)^T}{\sqrt{d_k}})`$        {Attention scores}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`O^h \leftarrow S^hV^h`$              {Attention output}  
+&nbsp;&nbsp;&nbsp;&nbsp;$`\delta_h \leftarrow \frac{1}{n} \|A^h\|_F \cdot (\|W_Q^h\|_F+\|W_K^h\|_F+\|W_V^h\|_F)`$  
+&nbsp;&nbsp;&nbsp;&nbsp;$`D_{attn} \leftarrow D_{attn} + \delta_h`$  
 end for  
-return $D_{attn}=0$
+return $`D_{attn}=0`$
 
 ---
 
 The presented algorithm requires:   
-• $O(Hn^2d_k+Hnd_v^2)$ time (attention computation),  
-• $O(Hnd_v)$ space (attention outputs storage).  
+• $`O(Hn^2d_k+Hnd_v^2)`$ time (attention computation),  
+• $`O(Hnd_v)`$ space (attention outputs storage).  
 Also, we should note some features of the divergence calculation in such layers and blocks.  
 1. For multi-head attention, we have to compute divergence separately for each head.
 2. Layer normalization can be incorporated by normalizing inputs.
 3. Residual connections should be accounted for in the divergence measure.
 4. The divergence captures both attention pattern changes and value transformations.
 5. For transformer blocks, combine with FFN divergence:  
-$D_{block} = D_{attn} + D_{ffn}$
+$`D_{block} = D_{attn} + D_{ffn}`$
 
 ---
 
