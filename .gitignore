@@ -1,0 +1,193 @@
+venv/
+data/
+weights/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+.Pipfile
+.Pipfile.lock
+
+# Poetry
+.poetry/
+.pytest_cache/
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+*.sage.pyi
+*.sage.json
+*.sage.pyx
+*.sage.pxd
+*.sage.pxi
+*.sage.wsgi
+*.sage.math
+build/
+dist/
+sage/
+temp/
+*.egg-info/
+*.egg
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dll
+*.pyd
+*.dll
+*.c
+*.h
+*.pxd
+*.pyx
+*.pxi
+*.pxd
+*.rst
+*.pdf
+*.html
+*.css
+*.js
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.eot
+*.ttf
+*.woff
+*.woff2
+*.otf
+*.swf
+*.flv
+*.mp4
+*.mp3
+*.wav
+*.ogg
+*.webm
+*.zip
+*.tar
+*.gz
+*.bz2
+*.xz
+*.rar
+*.7z
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.txt
+*.csv
+*.tsv
+*.json
+*.xml
+*.yaml
+*.yml
+*.ini
+*.cfg
+*.conf
+*.env
+*.env.*
+*.log
+*.pid
+*.pid.*
+*.sock
+*.sock.*
+*.lock
+*.lock.*
+*.bak
+*.bak.*
+*.swp
+*.swp.*
+*.tmp
+*.tmp.*
+*.temp
+*.temp.*
+*.old
+*.old.*
+*.new
+*.new.*
+*.orig
+*.orig.*
+*.backup
+*.backup.*
+*.~*
+*~
